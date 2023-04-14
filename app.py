@@ -132,19 +132,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
 
 #--------------------------------------------------------------------------Comando /pauta
 
-    elif ultima_mensagem == "/pauta":
-      pauta = {}
-      texto_pauta = f"""Escreva o assunto da pauta"""
 
-      mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-      requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
-
-      mensagem_pauta = request.json
-      assunto_pauta = mensagem_pauta["message"]["text"]
-
-      pauta["Pauta"] = assunto_pauta
-
-      print(pauta)
 
         
 #---------------------------------------------------------------------------- Responde
