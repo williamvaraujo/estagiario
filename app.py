@@ -70,70 +70,7 @@ def dividir_texto(texto):
 ##############################################################################################################################
 #-------------------------------------------------------------------------------Configuração do FLASK
 app = Flask(__name__)
-@app.route("/bot-das-pautas", methods=["POST"])
+@app.route("/bot-estagiario", methods=["POST"])
+def bot_estagiario()
+    print("ok")
 
-#-------------------------------------------------------------------------------Disparo da função
-def bot_das_pautas():
-    #
-    primeira_mensagem = request.json
-    ultima_mensagem = primeira_mensagem["message"]["text"]
-    chat_id = primeira_mensagem["message"]["chat"]["id"]
-    nome_usuario = primeira_mensagem["message"]["from"]["first_name"]  
-    print(primeira_mensagem)
-    print(ultima_mensagem)
-    print(chat_id)
-    print(nome_usuario)
-    
-#------------------------------------------------------------------------------ Comando /start
-    if ultima_mensagem == "/start":
-        #MENSAGEM DE BOAS-VINDAS E ORIENTAÇÃO
-        resposta = f"""
-Olá, {nome_usuario}, tudo bem?
-Eu sou o Bot Estagiário
-
-Antes de continuar, preciso que fique atento ao modo de uso da ferramenta:
-1 - Responda apenas o que for solicitado pelo bot;
-2 - AGUARDE O RETORNO PARA A DEMANDA, pois podemos demorar alguns segundos para responder;
-3 - Compreenda que sou uma ferramenta colaborativa. Mesmo após obter os resultados, será necessário revisá-los para saber se consegui atender suas expectativas;
-4 - Tenha em mãos algum link sobre a informação para que o BOT seja contextualizado com fatos dos dias atuais;
-5 - Sempre que quiser resetar a conversa, digite e envie "/start" (sem aspas);
-6 - Leia atentamente cada comando para chegar onde deseja
-7 - Esta ferramenta foi desenvolvida por Will Araújo.
-
-*************************
-
-Para continuarmos, clique no link a seguir: /menu.
-Será um prazer ajudar.
-  """
-
-#---------------------------------------------------------------------------Comando /menu
-        
-    elif ultima_mensagem == "/menu":
-        #      
-        #ORIENTAÇÕES PARA CONSTRUÇÃO DO ASSUNTO
-        resposta = f"""
-Vamos lá. 
-
-Por favor, veja abaixo as nossas opções de trabalho.
-
-1 - /pauta para criar uma pauta a partir de um resumo e link de balizamento;
-2 - /noticia para criar uma matéria a partir de um boletim de ocorrência, pdf on-line, link de ou publicação;
-3 - /previsao para criar uma nota de previsão com base no boletim do tempo;
-4 - /carrossel para criar 5 pequenos textos com base em um link de notícias.
-
-
-**************
-LEMBRE-SE: links são importantes para que eu seja atualizado sobre o assunto e apresente informações mais assertivas.
-Além disso, sempre aguarde o retorno, pois a construção da pauta pode demorar até 3 minutos.
-Sempre que quiser voltar ao menu, digite ou clique em /menu
-
-
-**************
-    """
-
-        
-#---------------------------------------------------------------------------- Responde
-    #ENVIA A MENSAGEM PARA O USUÁRIO
-    novo_texto = {"chat_id": chat_id, "text": resposta}
-    requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=novo_texto)
-    return "Ok"
