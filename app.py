@@ -137,7 +137,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
 
 #--------------------------------------------------------------------------Comando /pauta
 
-   elif not ultima_mensagem.startswith("/") and not "@" in ultima_mensagem:
+    elif not ultima_mensagem.startswith("/") and not "@" in ultima_mensagem:
         print("É um assunto com link e chegou no CHATGPT***********")
         print(ultima_mensagem)
                 
