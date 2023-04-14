@@ -21,12 +21,11 @@ from oauth2client.service_account import ServiceAccountCredentials
 #TOKEN TELEGRAM #TELEGRAM_APY_TOKEN
 token_telegram = os.environ["TELEGRAM_API_KEY"]
 
-
 #TOKEN GOOGLE SHEETS API #ARQUIVO OCULTO NA RAIZ
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
 with open("credenciais.json", mode="w") as fobj:
   fobj.write(GOOGLE_SHEETS_CREDENTIALS)
-id_da_planilha = "1JMO_CCRtR7y2ntpYNZixc2Ma3e7VbtMj31zb7ymJc8c"   #ID_PLANILHA
+id_da_planilha = "1kBqC3I-sW3paC3zdQ_9lGnAK64R38rmokeXJdrG7obU"   #ID_PLANILHA
 nome_da_pag = "NOME_PLANILHA"    #NOME_PLANILHA
 scopes = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -39,15 +38,12 @@ cliente = gspread.authorize(gs_credenciais)
 planilha = cliente.open_by_key(id_da_planilha).sheet1
   
 #TOKEN_CHAT_GPT #TOKEN_CHATGPT
-token_chatgpt = os.environ["TOKEN_CHATGPT"]
-headers_chatgpt = {"Authorization": f"Bearer {token_chatgpt}", "content-type": "Application/json"}
-link_chatgpt = "https://api.openai.com/v1/chat/completions"
-id_modelo_chatgpt = "gpt-3.5-turbo"
+token_chatgpt = "TOKEN_CHATGPT"
 
 #CADASTRO DO E-MAIL
 # Configurar informações da conta
-email = os.environ["EMAIL"] #email
-senha_email = os.environ["SENHA_EMAIL"] #senha_email
+email = "EMAIL" #email
+senha_email = "SENHA_EMAIL" #senha_email
 #-----------------------------------------------------------------
 #################################################################
 
