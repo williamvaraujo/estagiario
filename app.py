@@ -144,7 +144,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
             ultima_mensagem = primeira_mensagem["message"]["text"]
             time.sleep(10)
 
-        else ultima_mensagem != "/pauta":
+        if ultima_mensagem != "/pauta":
             pauta["Pauta"] = ultima_mensagem
             print(pauta)
             texto_pauta = f"""Insira o link de alguma notícia recente sobre o assunto ou algum conteúdo que sirva para me ajudar com mais informações sobre a pauta."""
@@ -172,11 +172,13 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
                     ultima_mensagem = primeira_mensagem["message"]["text"]
                     time.sleep(10)
 
-                if ultima_mensagem == "/criar_pauta":
-                    print('chegamos até aqui')
+                elif ultima_mensagem == "/criar_pauta":
+                    print("chegamos até aqui")
+        else:
+          print("fechamos no if")
                 
     else:
-        print('não passamos pelos loops')
+        print("não passamos pelos loops")
 
         
 #---------------------------------------------------------------------------- Responde
