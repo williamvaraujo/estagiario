@@ -181,7 +181,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
         print("não passamos pelos loops")
 
         
-#---------------------------------------------------------------------------- Responde
+#----------------------------------------------------------------------------- Responde
     #ENVIA A MENSAGEM PARA O USUÁRIO
     novo_texto = {"chat_id": chat_id, "text": resposta}
     requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=novo_texto)
