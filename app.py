@@ -172,7 +172,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
                     ultima_mensagem = primeira_mensagem["message"]["text"]
                     time.sleep(10)
 
-                elif ultima_mensagem == "/criar_pauta":
+                if ultima_mensagem == "/criar_pauta":
                     print("chegamos até aqui")
         else:
           print("fechamos no if")
