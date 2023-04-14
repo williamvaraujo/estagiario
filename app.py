@@ -78,8 +78,8 @@ def bot_estagiario():
     #
     primeira_mensagem = request.get_json()
     
-    #primeira_mensagem = requests.get(f"https://api.telegram.org/bot{token_telegram}/getUpdates?offset={offset + 1}").json()["result"]
-    print(primeira_mensagem)
+    teste = requests.get(f"https://api.telegram.org/bot{token_telegram}/getUpdates?offset={offset + 1}").json()
+    print(teste)
     ultima_mensagem = primeira_mensagem["message"]["text"]
     chat_id = primeira_mensagem["message"]["chat"]["id"]
     nome_usuario = primeira_mensagem["message"]["from"]["first_name"]  
