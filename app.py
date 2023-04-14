@@ -175,8 +175,13 @@ A pauta precisa ter o seguinte formato:
         #CONFIGURANDO O ENVIO DA RESPOSTA DO CHATGPT PARA SER REPASSADA AO TELEGRAM
         
         retorno_chatgpt = requisicao_chatgpt.json()
-        resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
-        time.sleep(5)
+        resposta_chatgpt = None
+            
+        while resposta_chatgpt = None:
+            resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
+            time.sleep(5)
+            print(f"Status code: {requisicao_chatgpt.status_code}")
+            print(f"Resposta: {requisicao_chatgpt.text}")
 
         
         print(resposta_chatgpt)
