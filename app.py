@@ -71,6 +71,6 @@ def dividir_texto(texto):
 #-------------------------------------------------------------------------------Configuração do FLASK
 app = Flask(__name__)
 @app.route("/bot-estagiario", methods=["POST"])
-def bot_estagiario()
+def bot_estagiario():
     print("ok")
 
