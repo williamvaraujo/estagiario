@@ -137,54 +137,61 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
 
 #--------------------------------------------------------------------------Comando /pauta
 
-   #
-    elif ultima_mensagem == "/pauta":
-        #
-        pauta = {}
-        texto_pauta = f"""Escreva o assunto da pauta"""
-        mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-        requests.post(f"https://api.telegram.org/bot{token_telegram}/sendMessage", data=mensagem1)
-
-        if ultima_mensagem == "/pauta":
-            primeira_mensagem = request.json
-            ultima_mensagem = primeira_mensagem["message"]["text"]
-            time.sleep(10)
-
-        elif ultima_mensagem != "/pauta":
-            pauta["Pauta"] = ultima_mensagem
-            print(pauta)
-            texto_pauta = f"""Insira o link de alguma notícia recente sobre o assunto ou algum conteúdo que sirva para me ajudar com mais informações sobre a pauta."""
-            mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-            requests.post(f"https://api.telegram.org/bot{token_telegram}/sendMessage", data=mensagem1)
-
-            if not "https://" in ultima_mensagem:
-                primeira_mensagem = request.json
-                ultima_mensagem = primeira_mensagem["message"]["text"]
-                time.sleep(10)
-
-            else:
-                pauta["Link"] = ultima_mensagem
-                primeira_mensagem = request.json
-                chat_id = primeira_mensagem["message"]["chat"]["id"]
-                mensagem_antiga = chat_id
-                print(pauta)
-                texto_pauta = f"""Obrigado. Agora, clique em /criar_pauta e aguarde"""
-                mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-                requests.post(f"https://api.telegram.org/bot{token_telegram}/sendMessage", data=mensagem1)
-
-                if mensagem_antiga == chat_id:
-                    primeira_mensagem = request.json
-                    chat_id = primeira_mensagem["message"]["chat"]["id"]
-                    ultima_mensagem = primeira_mensagem["message"]["text"]
-                    time.sleep(10)
-
-                elif ultima_mensagem == "/criar_pauta":
-                    print("chegamos até aqui")
-        else:
-          print("fechamos no if")
+    elif not ultima_mensagem.startswith("/"):
+        print("É um assunto com link e chegou no CHATGPT***********")
+        print(ultima_mensagem)
                 
-    else:
-        print("não passamos pelos loops")
+        #VERIFICANDO A MENSAGEM COMO UM LINK E FORMATANDO PARA SER USADA NO CHATGPT
+        assunto = ultima_mensagem
+        headers_chatgpt = {"Authorization": f"Bearer {token_chatgpt}", "content-type": "Application/json"}
+        link_chatgpt = "https://api.openai.com/v1/chat/completions"
+        id_modelo_chatgpt = "gpt-3.5-turbo"
+        print("chegou até o corpo da mensagem")
+        
+        corpo_mensagem = {
+        "model": id_modelo_chatgpt,
+        "messages": [{"role": "user", "content": f"""
+Olá, gostaria de trabalhar com você para que construa uma pauta jornalística. Por isso, peço que entre em um modo que familiarizado com 
+o jornalismo brasileiro.
+
+Este é o assunto: {assunto}
+
+A pauta precisa ter o seguinte formato:
+1 - Produza uma sugestão de um título sobre o assunto com até 62 caracteres. Este tópico será chamado TÍTULO;
+2 - Produza uma introdução e contextualização a partir do link enviado. Pode ser também um resumo. Este tópico será chamado INTRODUÇÃO;
+3 - Produza uma abordagem semelhante à do link e somada a uma nova, explicando o que não foi explorado pelo texto, mas poderia ser apurado. Coloque a abordagem direciona à editoria que o usuário mencionou. Este tópico será chamado ABORDAGEM;
+4 - Sugira ao menos 3 tipos de profissionais ou profissões que podem servir de fonte para a apuração. Junto, coloque o endereço de e-mail público de cada um, caso exista. Na ausência de nomes, indique profissões ou cargos que podem servir de fontes. Este tópico será chamado FONTES DE SUGESTÃO;
+5 - Indique uma palavra-chave a ser pesquisa no Google e que pode fornecer mais links sobre o assunto. Este tópico será chamado USE ESTA PALAVRA-CHAVE E PESQUISE MAIS INFORMAÇÕES COM ELA;
+6 - Sugira ao menos cinco perguntas com base no assunto e editoria que foi enviada. Este tópico será chamado PERGUNTAS DE SUGESTÃO;
+7 - Indique quais secretarias do governo Federal, Estadual ou Municipal brasileiro que podem ajudar no assunto. Explique porque buscar essa fonte oficial é importante e qual a função dela. Este tópico será chamado FONTES OFICIAIS.
+"""
+           }]}
+        
+        resposta_chatgpt_fim = await enviar_mensagem(link_chatgpt, headers_chatgpt, corpo_mensagem)
+        print(resposta_chatgpt_fim)
+                
+        
+        #CADASTRANDO A PAUTA NA PLANILHA
+        nome_usuario = primeira_mensagem["message"]["from"]["first_name"]
+        update_id = primeira_mensagem["update_id"]
+        chat_id = primeira_mensagem["message"]["chat"]["id"]
+        data_atual = datetime.now()
+        data_formatada = data_atual.strftime("%d/%m/%Y")
+        planilha.insert_row([data_formatada, update_id, nome_usuario, resposta_chatgpt_fim], 2)
+        
+        #ENVIA A RESPOSTA AO TELEGRAM
+        resposta = f"""{resposta_chatgpt_fim}
+        
+*******************************************************************************
+
+{nome_usuario}, podemos continuar a partir dessa pauta?
+
+Darei cerca de dois minutos para responder.
+
+Clique para responder:
+1 - /Sim, vamos para a próxima etapa.
+2 - /Nao, refaça com uma abordagem diferente
+"""
 
         
 #----------------------------------------------------------------------------- Responde
