@@ -64,6 +64,8 @@ def dividir_texto(texto):
     print(destinatario)
     print(assunto_do_email)
     return destinatario, assunto_do_email
+ 
+offset = 0
     
 
 ##############################################################################################################################
@@ -74,14 +76,17 @@ app = Flask(__name__)
 #-------------------------------------------------------------------------------Disparo da função
 def bot_estagiario():
     #
-    primeira_mensagem = request.json
-    ultima_mensagem = primeira_mensagem["message"]["text"]
-    chat_id = primeira_mensagem["message"]["chat"]["id"]
-    nome_usuario = primeira_mensagem["message"]["from"]["first_name"]  
+    #primeira_mensagem = request.json
+    
+    primeira_mensagem = requests.get(f'https://api.telegram.org/bot{token_telegram}/getUpdates?offset={offset + 1}').json()['result']
     print(primeira_mensagem)
+    ultima_mensagem = primeira_mensagem['1]["message"]["text"]
+    #chat_id = primeira_mensagem["message"]["chat"]["id"]
+    #nome_usuario = primeira_mensagem["message"]["from"]["first_name"]  
+    #print(primeira_mensagem)
     print(ultima_mensagem)
-    print(chat_id)
-    print(nome_usuario)
+    #print(chat_id)
+    #print(nome_usuario)
     
 #------------------------------------------------------------------------------ Comando /start
     if ultima_mensagem == "/start":
