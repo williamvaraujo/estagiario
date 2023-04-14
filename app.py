@@ -140,6 +140,6 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
 #----------------------------------------------------------------------------- Responde
     #ENVIA A MENSAGEM PARA O USUÁRIO
     novo_texto = {"chat_id": chat_id, "text": resposta}
-    requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=novo_texto)
+    requests.post(f"https://api.telegram.org/bot{token_telegram}/sendMessage", data=novo_texto)
     return "Ok"
 
