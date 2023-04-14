@@ -144,7 +144,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
             ultima_mensagem = primeira_mensagem["message"]["text"]
             time.sleep(10)
 
-        else ultima_mensagem != "pauta":
+        else ultima_mensagem != "/pauta":
             pauta["Pauta"] = ultima_mensagem
             print(pauta)
             texto_pauta = f"""Insira o link de alguma notícia recente sobre o assunto ou algum conteúdo que sirva para me ajudar com mais informações sobre a pauta."""
