@@ -116,6 +116,7 @@ Antes de continuar, preciso que fique atento ao modo de uso da ferramenta:
 5 - Sempre que quiser resetar a conversa, digite e envie "/start" (sem aspas);
 6 - Você pode pedir que a matéria seja refeita quantas vezes quiser, mas lembre-se de que quanto mais o assunto for detalhado e tiver links de balizamento melhor;
 7 - Esta ferramenta foi desenvolvida pelo jornalista Will Araújo.
+
 *************************
 Para continuarmos, clique no link a seguir: /continuar.
 Será um prazer ajudar.
@@ -138,7 +139,7 @@ Além disso, sempre aguarde o retorno, pois a construção da pauta pode demorar
 **************
 
 EXEMPLO: 
-Gostaria de obter uma pauta sobre o assunto: "XXXXXXX XXX XXXXXXXXXXXXX"
+Gostaria de obter uma matéria sobre o assunto: "XXXXXXX XXX XXXXXXXXXXXXX"
 Para balizar a abordagem e contexto, use o link: https://XXXX.XXXX.XXXX/XXXX como referência.
 A abordagem precisa ser direcionada para a editoria: ECONOMIA.
 
