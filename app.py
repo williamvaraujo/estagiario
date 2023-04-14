@@ -137,15 +137,12 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
 
 #--------------------------------------------------------------------------Comando /pauta
 
-    elif not ultima_mensagem.startswith("/"):
+elif not ultima_mensagem.startswith("/") and not "@" in ultima_mensagem:
         print("É um assunto com link e chegou no CHATGPT***********")
         print(ultima_mensagem)
                 
         #VERIFICANDO A MENSAGEM COMO UM LINK E FORMATANDO PARA SER USADA NO CHATGPT
         assunto = ultima_mensagem
-        headers_chatgpt = {"Authorization": f"Bearer {token_chatgpt}", "content-type": "Application/json"}
-        link_chatgpt = "https://api.openai.com/v1/chat/completions"
-        id_modelo_chatgpt = "gpt-3.5-turbo"
         print("chegou até o corpo da mensagem")
         
         corpo_mensagem = {
@@ -153,9 +150,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
         "messages": [{"role": "user", "content": f"""
 Olá, gostaria de trabalhar com você para que construa uma pauta jornalística. Por isso, peço que entre em um modo que familiarizado com 
 o jornalismo brasileiro.
-
 Este é o assunto: {assunto}
-
 A pauta precisa ter o seguinte formato:
 1 - Produza uma sugestão de um título sobre o assunto com até 62 caracteres. Este tópico será chamado TÍTULO;
 2 - Produza uma introdução e contextualização a partir do link enviado. Pode ser também um resumo. Este tópico será chamado INTRODUÇÃO;
@@ -167,9 +162,25 @@ A pauta precisa ter o seguinte formato:
 """
            }]}
         
-        resposta_chatgpt_fim = await enviar_mensagem(link_chatgpt, headers_chatgpt, corpo_mensagem)
-        print(resposta_chatgpt_fim)
-                
+        #CONFIGURANDO O ENVIO DO PROMPT PARA O CHATGPT
+
+        corpo_mensagem = json.dumps(corpo_mensagem)
+        requisicao_chatgpt = requests.post(link_chatgpt, headers=headers_chatgpt, data=corpo_mensagem)
+        teste = requisicao_chatgpt.json()
+        print(f"Status code: {requisicao_chatgpt.status_code}")
+        print(f"Resposta: {requisicao_chatgpt.text}")
+        print(teste)
+        print("Foi enviado o prompt ao ChatGPT")
+        
+        #CONFIGURANDO O ENVIO DA RESPOSTA DO CHATGPT PARA SER REPASSADA AO TELEGRAM
+        
+        retorno_chatgpt = requisicao_chatgpt.json()
+        resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
+        time.sleep(5)
+
+        
+        print(resposta_chatgpt)
+        print("Passou pelo While")        
         
         #CADASTRANDO A PAUTA NA PLANILHA
         nome_usuario = primeira_mensagem["message"]["from"]["first_name"]
@@ -177,22 +188,16 @@ A pauta precisa ter o seguinte formato:
         chat_id = primeira_mensagem["message"]["chat"]["id"]
         data_atual = datetime.now()
         data_formatada = data_atual.strftime("%d/%m/%Y")
-        planilha.insert_row([data_formatada, update_id, nome_usuario, resposta_chatgpt_fim], 2)
+        planilha.insert_row([data_formatada, update_id, nome_usuario, resposta_chatgpt], 2)
         
         #ENVIA A RESPOSTA AO TELEGRAM
-        resposta = f"""{resposta_chatgpt_fim}
-        
-*******************************************************************************
-
+        resposta = f"""{resposta_chatgpt}+
+*******************************************************
 {nome_usuario}, podemos continuar a partir dessa pauta?
-
-Darei cerca de dois minutos para responder.
-
 Clique para responder:
 1 - /Sim, vamos para a próxima etapa.
 2 - /Nao, refaça com uma abordagem diferente
 """
-
         
 #----------------------------------------------------------------------------- Responde
     #ENVIA A MENSAGEM PARA O USUÁRIO
