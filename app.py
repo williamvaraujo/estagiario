@@ -136,56 +136,7 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
     """
 
 #--------------------------------------------------------------------------Comando /pauta
-    #
-    elif ultima_mensagem == "/pauta":
-        #
-        pauta = {}
-        texto_pauta = f"""Escreva o assunto da pauta"""
-        mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-        requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
 
-        while ultima_mensagem == "/pauta":
-            primeira_mensagem = request.json
-            ultima_mensagem = primeira_mensagem["message"]["text"]
-            time.sleep(10)
-
-        if ultima_mensagem != "/pauta":
-            pauta["Pauta"] = ultima_mensagem
-            print(pauta)
-            texto_pauta = f"""Insira o link de alguma notícia recente sobre o assunto ou algum conteúdo que sirva para me ajudar com mais informações sobre a pauta."""
-            mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-            requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
-
-            while not "https://" in ultima_mensagem:
-                primeira_mensagem = request.json
-                ultima_mensagem = primeira_mensagem["message"]["text"]
-                time.sleep(10)
-
-            else:
-                pauta["Link"] = ultima_mensagem
-                primeira_mensagem = request.json
-                chat_id = primeira_mensagem["message"]["chat"]["id"]
-                mensagem_antiga = chat_id
-                print(pauta)
-                texto_pauta = f"""Obrigado. Agora, clique em /criar_pauta e aguarde"""
-                mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
-                requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
-
-                while mensagem_antiga == chat_id:
-                    primeira_mensagem = request.json
-                    chat_id = primeira_mensagem["message"]["chat"]["id"]
-                    ultima_mensagem = primeira_mensagem["message"]["text"]
-                    time.sleep(10)
-
-                if ultima_mensagem == "/criar_pauta":
-                    print("chegamos até aqui")
-        else:
-          print("fechamos no if")
-                
-    else:
-        print("não passamos pelos loops")
-
-        
 #----------------------------------------------------------------------------- Responde
     #ENVIA A MENSAGEM PARA O USUÁRIO
     novo_texto = {"chat_id": chat_id, "text": resposta}
