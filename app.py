@@ -87,7 +87,7 @@ def bot_estagiario():
     print(ultima_mensagem)
     print(chat_id)
     print(nome_usuario)
-    
+    resposta = "Você não digitou uma mensagem válida. Por favor, verifique novamente as últimas instruções"
 #------------------------------------------------------------------------------ Comando /start
     if ultima_mensagem == "/start":
         #MENSAGEM DE BOAS-VINDAS E ORIENTAÇÃO
