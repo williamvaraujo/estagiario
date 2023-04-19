@@ -187,7 +187,7 @@ Preciso que você faça o seguinte:
         retorno_chatgpt = requisicao_chatgpt.json()
         resposta_chatgpt = None
             
-        while resposta_chatgpt = None:
+        while not resposta_chatgpt:
             resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
             time.sleep(5)
             print(f"Status code: {requisicao_chatgpt.status_code}")
