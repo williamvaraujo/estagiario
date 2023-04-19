@@ -193,20 +193,20 @@ Preciso que você faça o seguinte:
             print(f"Status code: {requisicao_chatgpt.status_code}")
             print(f"Resposta: {requisicao_chatgpt.text}")
 
-        
-        print(resposta_chatgpt)
-        print("Passou pelo While")        
-        
-        #CADASTRANDO A PAUTA NA PLANILHA
-        nome_usuario = primeira_mensagem["message"]["from"]["first_name"]
-        update_id = primeira_mensagem["update_id"]
-        chat_id = primeira_mensagem["message"]["chat"]["id"]
-        data_atual = datetime.now()
-        data_formatada = data_atual.strftime("%d/%m/%Y")
-        planilha.insert_row([data_formatada, update_id, nome_usuario, resposta_chatgpt], 2)
-        
-        #ENVIA A RESPOSTA AO TELEGRAM
-        resposta = f"""{resposta_chatgpt}+
+        else:
+            print(resposta_chatgpt)
+            print("Passou pelo While")        
+
+            #CADASTRANDO A PAUTA NA PLANILHA
+            nome_usuario = primeira_mensagem["message"]["from"]["first_name"]
+            update_id = primeira_mensagem["update_id"]
+            chat_id = primeira_mensagem["message"]["chat"]["id"]
+            data_atual = datetime.now()
+            data_formatada = data_atual.strftime("%d/%m/%Y")
+            planilha.insert_row([data_formatada, update_id, nome_usuario, resposta_chatgpt], 2)
+
+            #ENVIA A RESPOSTA AO TELEGRAM
+            resposta = f"""{resposta_chatgpt}
 *******************************************************
 {nome_usuario}, podemos continuar a partir dessa pauta?
 Clique para responder:
