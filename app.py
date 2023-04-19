@@ -185,8 +185,8 @@ Preciso que você faça o seguinte:
         #CONFIGURANDO O ENVIO DA RESPOSTA DO CHATGPT PARA SER REPASSADA AO TELEGRAM
         
         retorno_chatgpt = requisicao_chatgpt.json()
-        resposta_chatgpt = None
-            
+        resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
+                    
         while not resposta_chatgpt:
             resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
             time.sleep(5)
