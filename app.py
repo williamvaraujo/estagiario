@@ -123,8 +123,30 @@ Será um prazer ajudar.
   """
 
 #---------------------------------------------------------------------------/CONTINUAR --> RESPOSTA2
+        
+    elif ultima_mensagem == "/continuar":
+        #      
+        #ORIENTAÇÕES PARA CONSTRUÇÃO DO ASSUNTO
+        resposta = f"""
+Vamos lá. 
 
-    
+Por favor, insira abaixo um assunto, um link para contextualização.
+
+
+**************
+LEMBRE-SE: links são importantes para que eu seja atualizado sobre o assunto e apresente informações mais assertivas.
+Além disso, sempre aguarde o retorno, pois a construção da pauta pode demorar até 3 minutos.
+**************
+
+EXEMPLO: 
+Gostaria de obter uma matéria sobre o assunto: "XXXXXXX XXX XXXXXXXXXXXXX"
+Para balizar a abordagem e contexto, use o link: https://XXXX.XXXX.XXXX/XXXX como referência.
+A abordagem precisa ser direcionada para a editoria: ECONOMIA.
+
+OBSERVAÇÃO: quanto mais informação, mais assertiva a pauta. Por isso, seja claro sobre seus objetivos.
+    """
+        
+#--------------------------------------------------------------------------/CONVERSA    
     
     #ENVIA A MENSAGEM PARA O USUÁRIO
     novo_texto = {"chat_id": chat_id, "text": resposta}
