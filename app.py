@@ -91,8 +91,8 @@ def dividir_texto(texto):
 #FUNÇÃO DE FUNCIONAMENTO DO BOT
 
 app = Flask(__name__)
-@app.route("/bot-das-pautas", methods=["POST"])
-def bot_das_pautas():
+@app.route("/bot-estagiario", methods=["POST"])
+def bot_estagiario():
     #
     primeira_mensagem = request.json
     ultima_mensagem = primeira_mensagem["message"]["text"]
