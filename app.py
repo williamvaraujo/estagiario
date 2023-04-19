@@ -128,28 +128,29 @@ Para continuarmos, clique no link a seguir: /menu.
 Será um prazer ajudar.
   """
 
-#---------------------------------------------------------------------------/CONTINUAR --> RESPOSTA2
+#---------------------------------------------------------------------------Comando /menu
         
-    elif ultima_mensagem == "/continuar":
+    elif ultima_mensagem == "/menu":
         #      
         #ORIENTAÇÕES PARA CONSTRUÇÃO DO ASSUNTO
         resposta = f"""
 Vamos lá. 
 
-Por favor, insira abaixo um assunto, um link para contextualização.
+Por favor, veja abaixo as nossas opções de trabalho.
+
+1 - /pauta para criar uma pauta a partir de um resumo e link de balizamento;
+2 - /noticia para criar uma matéria a partir de um boletim de ocorrência, pdf on-line, link de ou publicação;
+3 - /previsao para criar uma nota de previsão com base no boletim do tempo;
+4 - /carrossel para criar 5 pequenos textos com base em um link de notícias.
 
 
 **************
 LEMBRE-SE: links são importantes para que eu seja atualizado sobre o assunto e apresente informações mais assertivas.
 Além disso, sempre aguarde o retorno, pois a construção da pauta pode demorar até 3 minutos.
+Sempre que quiser voltar ao menu, digite ou clique em /menu
+
+
 **************
-
-EXEMPLO: 
-Gostaria de obter uma matéria sobre o assunto: "XXXXXXX XXX XXXXXXXXXXXXX"
-Para balizar a abordagem e contexto, use o link: https://XXXX.XXXX.XXXX/XXXX como referência.
-A abordagem precisa ser direcionada para a editoria: ECONOMIA.
-
-OBSERVAÇÃO: quanto mais informação, mais assertiva a pauta. Por isso, seja claro sobre seus objetivos.
     """
         
 #--------------------------------------------------------------------------/PRODUZA        
