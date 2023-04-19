@@ -111,17 +111,20 @@ def bot_estagiario():
         #MENSAGEM DE BOAS-VINDAS E ORIENTAÇÃO
         resposta = f"""
 Olá, {nome_usuario}, tudo bem?
+Eu sou o Bot Estagiário
+
 Antes de continuar, preciso que fique atento ao modo de uso da ferramenta:
 1 - Responda apenas o que for solicitado pelo bot;
 2 - AGUARDE O RETORNO PARA A DEMANDA, pois podemos demorar alguns segundos para responder;
 3 - Compreenda que sou uma ferramenta colaborativa. Mesmo após obter os resultados, será necessário revisá-los para saber se consegui atender suas expectativas;
 4 - Tenha em mãos algum link sobre a informação para que o BOT seja contextualizado com fatos dos dias atuais;
 5 - Sempre que quiser resetar a conversa, digite e envie "/start" (sem aspas);
-6 - Você pode pedir que a matéria seja refeita quantas vezes quiser, mas lembre-se de que quanto mais o assunto for detalhado e tiver links de balizamento melhor;
-7 - Esta ferramenta foi desenvolvida pelo jornalista Will Araújo.
+6 - Leia atentamente cada comando para chegar onde deseja
+7 - Esta ferramenta foi desenvolvida por Will Araújo.
 
 *************************
-Para continuarmos, clique no link a seguir: /continuar.
+
+Para continuarmos, clique no link a seguir: /menu.
 Será um prazer ajudar.
   """
 
