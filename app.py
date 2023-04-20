@@ -165,13 +165,17 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
             primeira_mensagem = request.json
             ultima_mensagem = primeira_mensagem["message"]["text"]
             time.sleep(10)
+            print("Fizemos o sleep de 10 segundos")
 
         else:# ultima_mensagem != "/pauta":
+            primeira_mensagem = request.json
+            ultima_mensagem = primeira_mensagem["message"]["text"]
             pauta["Pauta"] = ultima_mensagem
             print(pauta)
             texto_pauta = f"""Insira o link de alguma notícia recente sobre o assunto ou algum conteúdo que sirva para me ajudar com mais informações sobre a pauta."""
             mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
             requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
+            print("Chegamos ao fim do primeiro While")
 
             while not "https://" in ultima_mensagem:
                 primeira_mensagem = request.json
