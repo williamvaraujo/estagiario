@@ -152,76 +152,59 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
 
 **************
     """
-        
+#--------------------------------------------------------------------------/Pauta
+
+    elif ultima_mensagem == "/pauta":
+        #
+        pauta = {}
+        texto_pauta = f"""Escreva o assunto da pauta"""
+        mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
+        requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
+
+        while ultima_mensagem == "/pauta":
+            primeira_mensagem = request.json
+            ultima_mensagem = primeira_mensagem["message"]["text"]
+            time.sleep(10)
+
+        else ultima_mensagem != "/pauta":
+            pauta["Pauta"] = ultima_mensagem
+            print(pauta)
+            texto_pauta = f"""Insira o link de alguma notícia recente sobre o assunto ou algum conteúdo que sirva para me ajudar com mais informações sobre a pauta."""
+            mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
+            requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
+
+            while not "https://" in ultima_mensagem:
+                primeira_mensagem = request.json
+                ultima_mensagem = primeira_mensagem["message"]["text"]
+                time.sleep(10)
+
+            else:
+                pauta["Link"] = ultima_mensagem
+                primeira_mensagem = request.json
+                chat_id = primeira_mensagem["message"]["chat"]["id"]
+                mensagem_antiga = chat_id
+                print(pauta)
+                texto_pauta = f"""Obrigado. Agora, clique em /criar_pauta e aguarde"""
+                mensagem1 = {"chat_id": chat_id, "text": texto_pauta}
+                requests.post(f"https://api.telegram.org./bot{token_telegram}/sendMessage", data=mensagem1)
+
+                while ultima_mensagem != "/criar_pauta":
+                    primeira_mensagem = request.json
+                    chat_id = primeira_mensagem["message"]["chat"]["id"]
+                    ultima_mensagem = primeira_mensagem["message"]["text"]
+                    time.sleep(10)
+
+                elif ultima_mensagem == "/criar_pauta":
+                    print('chegamos até aqui')
+                    print(pauta)
+
+    else:
+        print('não passamos pelos loops')
+
+
+
 #--------------------------------------------------------------------------/PRODUZA        
 
-    elif not ultima_mensagem.startswith("/") and not "@" in ultima_mensagem:
-        print("É um assunto com link e chegou no CHATGPT***********")
-        print(ultima_mensagem)
-                
-        #VERIFICANDO A MENSAGEM COMO UM LINK E FORMATANDO PARA SER USADA NO CHATGPT
-        assunto = ultima_mensagem
-        print("chegou até o corpo da mensagem")
-        
-        corpo_mensagem = {
-        "model": id_modelo_chatgpt,
-        "messages": [{"role": "user", "content": f"""
-Olá, gostaria de trabalhar com você para que construa uma notícia jornalística para mim. Por isso, peço que entre em um modo que familiarizado com 
-o jornalismo brasileiro. Inclusive, com as regras para construção do lide, desenvolvimento e linguagem jornalística para web.
-Este é o assunto: {assunto}
-Preciso que você faça o seguinte:
-1 - Leia o texto que está no link;
-2 - Extraia a informação do que é o fato, quem praticou o fato, onde ocorreu o fato, quando aconteceu o fato, como aconteceu o fato, por que aconteceu o fato;
-3 - Construa um texto com lide jornalística no início, no primeiro parágrafo, e depois desenvolva o texto a partir das informações que estão no link;
-4 - Não crie nenhuma informação nova e nem entre em outros links presentes no texto. Se atenha apenas ao texto do link enviado.
-5 - O texto precisa ter um tom de voz neutro, quase amigável, mas nunca na primeira pessoa do singular ou plural.
-6 - Além disso, caso exista uma boa quantidade de números, caso possam ser melhor apresentados em gráficos, faça essa conversão e traga um embed com o gráfico criado em html
-7 - Produza o texto como se fosse um jornalista e não invente nada novo. Se atenha aos fatos"""
-           }]}
-        
-        #CONFIGURANDO O ENVIO DO PROMPT PARA O CHATGPT
-
-        corpo_mensagem = json.dumps(corpo_mensagem)
-        requisicao_chatgpt = requests.post(link_chatgpt, headers=headers_chatgpt, data=corpo_mensagem)
-        teste = requisicao_chatgpt.json()
-        print(f"Status code: {requisicao_chatgpt.status_code}")
-        print(f"Resposta: {requisicao_chatgpt.text}")
-        print(teste)
-        print("Foi enviado o prompt ao ChatGPT")
-        
-        #CONFIGURANDO O ENVIO DA RESPOSTA DO CHATGPT PARA SER REPASSADA AO TELEGRAM
-        
-        retorno_chatgpt = requisicao_chatgpt.json()
-        resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
-                    
-        while not resposta_chatgpt:
-            resposta_chatgpt = retorno_chatgpt["choices"][0]["message"]["content"]
-            time.sleep(5)
-            print(f"Status code: {requisicao_chatgpt.status_code}")
-            print(f"Resposta: {requisicao_chatgpt.text}")
-
-        else:
-            print(resposta_chatgpt)
-            print("Passou pelo While")        
-
-            #CADASTRANDO A PAUTA NA PLANILHA
-            nome_usuario = primeira_mensagem["message"]["from"]["first_name"]
-            update_id = primeira_mensagem["update_id"]
-            chat_id = primeira_mensagem["message"]["chat"]["id"]
-            data_atual = datetime.now()
-            data_formatada = data_atual.strftime("%d/%m/%Y")
-            planilha.insert_row([data_formatada, update_id, nome_usuario, resposta_chatgpt], 2)
-
-            #ENVIA A RESPOSTA AO TELEGRAM
-            resposta = f"""{resposta_chatgpt}
-*******************************************************
-{nome_usuario}, podemos continuar a partir dessa pauta?
-Clique para responder:
-1 - /Sim, vamos para a próxima etapa.
-2 - /Nao, refaça com uma abordagem diferente
-"""
- 
-        
 #--------------------------------------------------------------------------/CONVERSA    
     
     #ENVIA A MENSAGEM PARA O USUÁRIO
