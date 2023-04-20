@@ -172,12 +172,11 @@ Este é o assunto: {assunto}
 Preciso que você faça o seguinte:
 1 - Leia o texto que está no link;
 2 - Extraia a informação do que é o fato, quem praticou o fato, onde ocorreu o fato, quando aconteceu o fato, como aconteceu o fato, por que aconteceu o fato;
-3 - Construa um texto com lide jornalística no início, no primeiro parágrafo, e depois desenvolva mais o texto a partir das informações que estão no link;
-4 - O texto precisa ter ao menos 300 palavras, mas pode ultrapassar essa quantidade
-5 - Não crie nenhuma informação nova e nem entre em outros links presentes no texto. Se atenha apenas ao texto do link enviado.
-6 - O texto precisa ter um tom de voz neutro, quase amigável, mas nunca na primeira pessoa do singular ou plural.
-7 - Além disso, caso exista uma boa quantidade de números, caso possam ser melhor apresentados em gráficos, faça essa conversão e traga um embed com o gráfico criado em html
-8 - Produza o texto como se fosse um jornalista e não invente nada novo. Se atenha aos fatos"""
+3 - Construa um texto com lide jornalística no início, no primeiro parágrafo, e depois desenvolva o texto a partir das informações que estão no link;
+4 - Não crie nenhuma informação nova e nem entre em outros links presentes no texto. Se atenha apenas ao texto do link enviado.
+5 - O texto precisa ter um tom de voz neutro, quase amigável, mas nunca na primeira pessoa do singular ou plural.
+6 - Além disso, caso exista uma boa quantidade de números, caso possam ser melhor apresentados em gráficos, faça essa conversão e traga um embed com o gráfico criado em html
+7 - Produza o texto como se fosse um jornalista e não invente nada novo. Se atenha aos fatos"""
            }]}
         
         #CONFIGURANDO O ENVIO DO PROMPT PARA O CHATGPT
