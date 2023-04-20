@@ -167,16 +167,17 @@ Sempre que quiser voltar ao menu, digite ou clique em /menu
         "model": id_modelo_chatgpt,
         "messages": [{"role": "user", "content": f"""
 Olá, gostaria de trabalhar com você para que construa uma notícia jornalística para mim. Por isso, peço que entre em um modo que familiarizado com 
-o jornalismo brasileiro.
+o jornalismo brasileiro. Inclusive, com as regras para construção do lide, desenvolvimento e linguagem jornalística para web.
 Este é o assunto: {assunto}
 Preciso que você faça o seguinte:
 1 - Leia o texto que está no link;
 2 - Extraia a informação do que é o fato, quem praticou o fato, onde ocorreu o fato, quando aconteceu o fato, como aconteceu o fato, por que aconteceu o fato;
 3 - Construa um texto com lide jornalística no início, no primeiro parágrafo, e depois desenvolva mais o texto a partir das informações que estão no link;
 4 - O texto precisa ter ao menos 300 palavras, mas pode ultrapassar essa quantidade
-5 - Não crie nenhuma informação nova
-6 - O texto precisa ter um tom de voz neutro
-5 -"""
+5 - Não crie nenhuma informação nova e nem entre em outros links presentes no texto. Se atenha apenas ao texto do link enviado.
+6 - O texto precisa ter um tom de voz neutro, quase amigável, mas nunca na primeira pessoa do singular ou plural.
+7 - Além disso, caso exista uma boa quantidade de números, caso possam ser melhor apresentados em gráficos, faça essa conversão e traga um embed com o gráfico criado em html
+8 - Produza o texto como se fosse um jornalista e não invente nada novo. Se atenha aos fatos"""
            }]}
         
         #CONFIGURANDO O ENVIO DO PROMPT PARA O CHATGPT
